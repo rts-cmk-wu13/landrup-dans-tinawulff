@@ -45,3 +45,26 @@ export async function getActivityDetails(id) {
     }
 }
 }
+
+export async function getUserDetails(id) {
+  const cookieStore = await cookies();
+  const accessTokenCookie = cookieStore.get("IPM_AT");
+
+  if (!accessTokenCookie) {
+    // Hvis ingen token, redirect til login
+      if (!accessTokenCookie) return null
+  }
+  const response = await fetch(`http://localhost:4000/api/v1/users/${id}`, {
+    headers: {
+      'Authorization': `Bearer ${accessTokenCookie.value}`
+    }
+  });
+
+   const data = await response.json();
+  console.log("user:", data);
+  
+   return {
+        succes: false,
+        message: "something went wrong on the server, try again later"
+    }
+}
