@@ -6,3 +6,42 @@
   console.log(data);
   return data;
   }
+
+export async function getActivityDetails(id) {
+    try {
+    if (!id) {
+        throw new Error({ message: "Missing ID parameter" });
+    }
+    if (!/^\d+$/.test(id)) {
+        throw new Error({ message: "Incorrect ID format"})
+    }
+
+    const res = await fetch(`http://localhost:4000/api/v1/activities/${id}`);
+    if (!res.ok) {
+        throw new Error("Failed to fetch the blog post");
+    }
+
+    //not working in thois api:
+    // if (res.status === 404) {
+    //     return notFound();
+    // }
+    
+    if (res.status !== 200) {
+        throw new Error({ message: res.statusText });
+    }
+
+    if (res.headers.get('content-type')?.includes('application/json')) {
+        return await res.json();
+    } else {
+        throw new Error("Unexpected content type");
+    }
+
+} catch (error) {
+    console.log("getActivityDetails Error", error);
+    
+    return {
+        succes: false,
+        message: "something went wrong on the server, try again later"
+    }
+}
+}
