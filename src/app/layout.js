@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import FooterOrMenu from "./components/FooterOrMenu";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,8 +23,14 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <main>
+       {children}
+        </main>
+      <FooterOrMenu />
       </body>
     </html>
   );
 }
+
+
+// lav så footer kun findes på homepage og menu på alle andre sider end homepage.
