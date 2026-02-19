@@ -8,7 +8,10 @@ export async function GET(request) {
 
   // Hent data fra flere kilder
   const activities = await getActivities();
-  //tilføj evt flere datakilder måske via getUsers og getActivityDetails hvis det er nødvendigt for at få nok data til søgningen
+  //tilføj flere datakilder via getUsers og getActivityDetails for at få nok data til søgningen,
+  // som skal være på aktivitetstitel, ugedag og intruktørnavn.
+
+
 //   const users = await getUsers();
 
   // Filtrer data
