@@ -15,7 +15,7 @@ export default function LoginForm() {
 
     const [state, formAction, isPending] = useActionState(loginUser, initialState);
 
-    console.log(state);
+    //console.log(state);
 
     return (
         <form action={formAction}>

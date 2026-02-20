@@ -1,5 +1,6 @@
 import HeroComp from "./components/homeComponents/Hero";
 import TeamTypes from "./components/homeComponents/TeamTypes";
+import NewLetter from "./components/homeComponents/NewLetter";
 
 // HoldTyper - Images & objekts til holdtyperne på forsiden.
 import boerneDans from "../assets/boernedans.jpg";
@@ -26,6 +27,8 @@ const articles = [
     <TeamTypes key={idx} title={item.title} text={item.text} img={item.img} />
     ))}
   </section>
+
+  <NewLetter />
 
   </>
    );
