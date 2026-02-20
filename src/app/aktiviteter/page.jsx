@@ -1,5 +1,5 @@
 //hent ind lisetevisning med aktiviteter/hold med fetch og ved klik på aktiviteten gå til detaljesiden/den aktivitets id -> /aktiviteter/[id]
-import Menu from '../components/menu';
+import Menu from '../components/Menu';
 
 import { getActivities } from '../lib/dal';
 import Link from 'next/link';
