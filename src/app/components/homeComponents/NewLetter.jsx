@@ -14,26 +14,26 @@ export default function NewLetter() {
 
 return (
    
- <section>
-    <h2 className="text-4xl">Nyhedsbrev</h2>
+ <section className="mx-6  mt-4 mb-12">
+    <h2 className="text-4xl mb-4">Nyhedsbrev</h2>
 
-    <p className="text-m leading-[1.2]">Få direkte besked når vi har sæsonstart eller afholder arrangementer.</p>
+    <p className="text-m leading-[1.2] mb-6">Få direkte besked når vi har sæsonstart eller afholder arrangementer.</p>
 
     {state.success && (
-    <p>Tak for din tilmelding til nyhedsbrevet, du vil snart modtage mails fra os.</p>
+    <p className="mb-4 text-green-400">Tak for din tilmelding til nyhedsbrevet, du vil snart modtage mails fra os.</p>
     )}
-    <form className="flex" action={formAction}>
-        <div>
-            <label htmlFor="email">Email: </label>
-            <input type="text" name="email" defaultValue={state.values.email} placeholder="Email"/>
+    <form className="flex w-full gap-4" action={formAction}>
+        <div className="bg-[#E9E9E9] w-full p-3">
+            <label htmlFor="email"></label>
+            <input className="text-black w-full text-m" type="text" name="email" defaultValue={state.values.email} placeholder="Email"/>
             {/* defaultvalue indsættes ud fra state, her er state enten inistialState eller den opdaterede state, med brugerens input values, optional chaining er derfor ikke nødvendig her, fordi vi har defineret en inistialState. */}
-            {state.errors?.email && <p>{state.errors.email}</p>}
         </div>
         <div>
-            { state.errors?.form && <p>{state.errors.form}</p> }
-            <button className="text-black" type="submit" disabled={isPending}>{ isPending ? "regitrerer mail..." : "Tilmeld" }</button>
+            <button className="text-[#003147] bg-[#E9E9E9] self-end p-3 rounded w-fit-content text-m" type="submit" disabled={isPending}>{ isPending ? "regitrerer mail..." : "Tilmeld" }</button>
         </div>
     </form>
+    { state.errors?.form && (<p className="text-red-500">{state.errors.form}</p>) }
+    { state.errors?.email && (<p className="text-red-500">{state.errors.email[0]}</p>)}
 
 </section>
 )

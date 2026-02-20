@@ -4,7 +4,7 @@ import { z }from "zod";
 import { cookies } from "next/headers";
 
 const emailSchema = z.object({
-    email: z.string().email("Indtast en gyldig email")
+    email: z.string().email("Indtast venligst en gyldig email!")
 });
 
 export async function registerEmail(prevState, formData) { // når vi laver en action og kobler den med et actionstate skal to argumenter med: forrige state (prevState) og formData (formdataen fra formularen)
