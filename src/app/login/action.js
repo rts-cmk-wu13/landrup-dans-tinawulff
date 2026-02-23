@@ -12,7 +12,7 @@ const loginSchema = z.object({
 
 export async function loginUser(prevState, formData) { // når vi laver en action og kobler den med et actionstate skal to argumenter med: forrige state (prevState) og formData (formdataen fra formularen)
 
-    const cookieStore = await cookies();
+    const cookieStore = await cookies(); //await fjernet
 
     const username = formData.get("username");
     const password = formData.get("password");
@@ -56,8 +56,9 @@ export async function loginUser(prevState, formData) { // når vi laver en actio
     const data = await response.json();
     console.log(data);
 
-    cookieStore.set("accessToken", data.accessToken)
-    cookieStore.set("username", data.name)
+    cookieStore.set("accessToken", data.token);
+    cookieStore.set("username", data.name);
+    cookieStore.set("userId", String(data.userId));
 
     return redirect("/profil"); // når login er succesfuldt, så redirecter vi brugeren til profil-siden.
 }

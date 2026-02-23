@@ -1,4 +1,4 @@
-'use client';
+'use client'
 // Hvis vi skal bruge hooks, så skal det være en client component med 'use client' i toppen.
 import { useActionState } from "react";
 import { loginUser } from "./action";   

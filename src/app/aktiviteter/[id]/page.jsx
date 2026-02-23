@@ -1,12 +1,15 @@
 //Detaljeside for holdet som hentes ud fra dets id
+import { cookies } from 'next/headers';
 import { getActivityDetails } from '../../lib/dal';
+import { getUserDetails } from '../../lib/dal';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-
+import AddActivityButton from '../AddActivityButton';
 
 export default async function ActivityDetailPage({ params }) {
-        const { id } = await params
-    const aktivitet = await getActivityDetails(id)
+    const { id } = await params;
+    const activityId = Number(id);
+    const aktivitet = await getActivityDetails(activityId)
 
     console.log(aktivitet)
 
@@ -20,13 +23,34 @@ export default async function ActivityDetailPage({ params }) {
   }
 
   if (!aktivitet.name) return notFound();
+
+// Hent bruger-id fra cookie og brugerdata
+const cookieStore = await cookies();
+const userId = cookieStore.get('userId')?.value;
+const user = await getUserDetails(userId);
+
+console.log("user:", user);
+
+// Tjek om brugeren allerede er tilmeldt aktiviteten
+const alreadyJoined = user?.activities?.some(a => a.id === activityId);
+
     return (
         <main>
             <article>
-            <Image width={300} height={300} src={aktivitet.asset.url} alt={aktivitet.name} unoptimized/>
-            <h1>{aktivitet.name}</h1>
-            <p>{aktivitet.minAge} - {aktivitet.maxAge}</p>
+            <div className='flex justify-end items-end relative'>
+                <Image className='w-full'
+                width={697} height={646} src={aktivitet.asset.url} alt={aktivitet.name} unoptimized/>
+                <AddActivityButton
+                userId={userId}
+                activityId={activityId}
+                alreadyJoined={alreadyJoined}
+            />
+            </div>
+            <div className='mt-6 mx-6'>
+            <h1 className='text-2xl font-semibold'>{aktivitet.name}</h1>
+            <p className='leading-none mb-4 text-sm'>{aktivitet.minAge} - {aktivitet.maxAge} år</p>
             <p>{aktivitet.description}</p>
+            </div>
             </article>
         </main>
     )

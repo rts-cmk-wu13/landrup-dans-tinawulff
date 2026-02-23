@@ -1,4 +1,4 @@
-
+import { cookies } from 'next/headers';
   
   export async function getActivities() {
   const response = await fetch("http://localhost:4000/api/v1/activities", { next: { revalidate: 60*60*24 } });
@@ -47,26 +47,43 @@ export async function getActivityDetails(id) {
 
 export async function getUserDetails(id) {
   const cookieStore = await cookies();
-  const accessTokenCookie = cookieStore.get("IPM_AT");
+  const accessTokenCookie = cookieStore.get("accessToken");
+  
+  console.log("getUserDetails: id", id);
+  console.log("getUserDetails: accessTokenCookie", accessTokenCookie);
 
   if (!accessTokenCookie) {
-    // Hvis ingen token, redirect til login
+        console.log("getUserDetails: No access token, returning null");
+        // Hvis ingen token, redirect til login
       if (!accessTokenCookie) return null
-  }
-  const response = await fetch(`http://localhost:4000/api/v1/users/${id}`, {
-    headers: {
-      'Authorization': `Bearer ${accessTokenCookie.value}`
     }
-  });
 
-   const data = await response.json();
-  console.log("user:", data);
-  
-   return {
-        succes: false,
-        message: "something went wrong on the server, try again later"
+    const response = await fetch(`http://localhost:4000/api/v1/users/${id}`, {
+        headers: {
+        'Authorization': `Bearer ${accessTokenCookie.value}`
+        }
+    });
+
+    console.log("getUserDetails: response.ok", response.ok);
+    console.log("getUserDetails: response.status", response.status);
+    console.log("getUserDetails: response.headers", response.headers.get('content-type'));
+
+
+    if (!response.ok || !response.headers.get('content-type')?.includes('application/json')) {
+    console.log("getUserDetails: fetch failed or not JSON, returning null");
+    return null;
     }
+    const data = await response.json();
+    console.log("getUserDetails: data", data);
+    return data;
+
+//    return {
+//         succes: false,
+//         message: "something went wrong on the server, try again later"
+//     }
 }
+
+
 
 // Bruges ikke:
 /* export async function getAllAssets() {
