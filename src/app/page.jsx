@@ -1,6 +1,7 @@
 import HeroComp from "./components/homeComponents/Hero";
 import TeamTypes from "./components/homeComponents/TeamTypes";
 import NewLetter from "./components/homeComponents/NewLetter";
+import ContactForm from "./components/homeComponents/ContactForm";
 
 // HoldTyper - Images & objekts til holdtyperne på forsiden.
 import boerneDans from "../assets/boernedans.jpg";
@@ -18,18 +19,20 @@ const articles = [
 
  export default function Home() {
    return (
-  <>
-  <HeroComp />
+    <>
+      <HeroComp />
 
-  <section id="TeamTypesSection" className="my-10">
-    <h1 className="mx-6 text-4xl mb-8">Vores holdtyper</h1>
-    {articles.map((item, idx) => (
-    <TeamTypes key={idx} title={item.title} text={item.text} img={item.img} />
-    ))}
-  </section>
+      <section id="TeamTypesSection" className="my-10">
+        <h1 className="mx-6 text-4xl mb-8">Vores holdtyper</h1>
+        {articles.map((item, idx) => (
+          <TeamTypes key={idx} title={item.title} text={item.text} img={item.img} />
+        ))}
+      </section>
 
-  <NewLetter />
+      <NewLetter />
 
-  </>
+      <ContactForm />
+
+    </>
    );
  }
