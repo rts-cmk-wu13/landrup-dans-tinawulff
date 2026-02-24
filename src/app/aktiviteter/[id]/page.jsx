@@ -5,6 +5,8 @@ import { getUserDetails } from '../../lib/dal';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import AddActivityButton from '../AddActivityButton';
+import Link from 'next/link';
+import { IoChevronForward } from "react-icons/io5";
 
 export default async function ActivityDetailPage({ params }) {
     const { id } = await params;
@@ -36,7 +38,7 @@ const alreadyJoined = user?.activities?.some(a => a.id === activityId);
 
     return (
         <main>
-            <article>
+            <article className='flex flex-col'>
             <div className='flex justify-end items-end relative'>
                 <Image className='w-full'
                 width={697} height={646} src={aktivitet.asset.url} alt={aktivitet.name} unoptimized/>
@@ -51,7 +53,12 @@ const alreadyJoined = user?.activities?.some(a => a.id === activityId);
             <p className='leading-none mb-4 text-sm'>{aktivitet.minAge} - {aktivitet.maxAge} år</p>
             <p>{aktivitet.description}</p>
             </div>
+
+            <Link className='text-white align-end self-end mx-2 relative bottom-[-50px] font-[700] flex items-center' href="/opret-bruger">
+                Opret din brugerprofil her <IoChevronForward size={25} className='mt-1'/>
+            </Link>
             </article>
+            
         </main>
     )
     

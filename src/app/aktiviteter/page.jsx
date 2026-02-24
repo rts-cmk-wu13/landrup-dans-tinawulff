@@ -21,19 +21,21 @@ export default async function ActivitiesPage () {
 
   return (
     <>
-    <header>
-      <Search />
-    </header>
-    <main className='pb-14'>
-    <section >
-     <h1 className='mx-8 my-4 text-4xl'>Aktiviteter</h1>
+      <header>
+        <Search />
+      </header>
+        <main className='pb-14'>
+          <section >
+            <h1 className='mx-8 my-4 text-4xl'>Aktiviteter</h1>
 
-     { activities.map(activity => (
-    <ActivityCard activity={activity} key={activity.id}/>
-     ))}
-    </section>
-    </main>
-    < Menu />
+            { activities.map(activity => (
+              <ActivityCard activity={activity} key={activity.id}/>
+            ))}
+          </section>
+
+          
+      </main>
+      < Menu />
     </>
   );
 }
