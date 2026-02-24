@@ -1,6 +1,7 @@
 import HeroComp from "./components/homeComponents/Hero";
 import TeamTypes from "./components/homeComponents/TeamTypes";
 import NewLetter from "./components/homeComponents/NewLetter";
+import Slider from "./components/homeComponents/slider";
 import ContactForm from "./components/homeComponents/ContactForm";
 
 // HoldTyper - Images & objekts til holdtyperne på forsiden.
@@ -30,6 +31,8 @@ const articles = [
       </section>
 
       <NewLetter />
+
+      <Slider />
 
       <ContactForm />
 
