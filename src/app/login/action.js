@@ -17,7 +17,7 @@ export async function loginUser(prevState, formData) { // når vi laver en actio
     const username = formData.get("username");
     const password = formData.get("password");
 
-    console.log(username, password);
+    // console.log(username, password);
 
     if (username === prevState.values.username && password === prevState.values.password) {
         return prevState;
@@ -54,7 +54,7 @@ export async function loginUser(prevState, formData) { // når vi laver en actio
     }
 
     const data = await response.json();
-    console.log(data);
+    console.log("login response data:", data);
 
     cookieStore.set("accessToken", data.token);
     cookieStore.set("username", data.name);

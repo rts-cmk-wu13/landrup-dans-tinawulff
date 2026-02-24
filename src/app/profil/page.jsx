@@ -24,7 +24,6 @@ export default async function ProfilPage() {
 
   console.log("userId:", userId);
   
-
   const user = await getUserDetails(userId);
   console.log("user:", user);
   console.log("token:", token?.value);
@@ -54,7 +53,6 @@ export default async function ProfilPage() {
                         </article>
                     ))}
             </section>
-
         </>
     )
   }
