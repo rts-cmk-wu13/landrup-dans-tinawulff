@@ -85,6 +85,8 @@ export async function getUserDetails(id) {
 
 
 
+
+
 // Bruges ikke:
 /* export async function getAllAssets() {
     try {
